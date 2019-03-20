@@ -1,0 +1,218 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The Cost of GraphQL’s Flexibility
+
+Perfect solutions are fairy tales. With the flexibility GraphQL introduces, a door opens on some clear problems and concerns.
+
+
+
+
+
+
+
+
+One other task that GraphQL makes a bit more challenging is client data caching. RESTful APIs are easier to cache because of their dictionary nature. This location gives that data. We can use the location itself as the cache key.
+
+With GraphQL, we can adopt a similar basic approach and use the query text as a key to cache its response. But this approach is limited, not very efficient, and can cause problems with data consistency. The results of multiple GraphQL queries can easily overlap, and this basic caching approach would not account for the overlap.
+
+There is a brilliant solution to this problem though. A Graph Query means a Graph Cache. If we normalize a GraphQL query response into a flat collection of records, giving each record a global unique ID, we can cache those records instead of caching the full responses.
+
+This is not a simple process though. There will be records referencing other records and we will be managing a cyclic graph there. Populating and reading the cache will need query traversal. We need to code a layer to handle the cache logic. But this method will overall be a lot more efficient than response-based caching. Relay.js is one framework that adopts this caching strategy and auto-manages it internally.
+
+Possibly the most important problem that we should be concerned about with GraphQL is the problem that’s commonly referred to as N+1 SQL queries. GraphQL query fields are designed to be stand-alone functions and resolving those fields with data from a database might result in a new database request per resolved field.
+
+For a simple RESTful API endpoint logic, it’s easy to analyze, detect, and solve N+1 issues by enhancing the constructed SQL queries. For GraphQL dynamically resolved fields, it’s not that simple. Luckily Facebook is pioneering one possible solution to this problem: DataLoader.
+
+As the name implies, DataLoader is a utility one can use to read data from databases and make it available to GraphQL resolver functions. We can use DataLoader instead of reading the data directly from databases with SQL queries, and DataLoader will act as our agent to reduce the actual SQL queries we send to the database.
+
+DataLoader uses a combination of batching and caching to accomplish that. If the same client request resulted in a need to ask the database about multiple things, DataLoader can be used to consolidate these questions and batch-load their answers from the database. DataLoader will also cache the answers and make them available for subsequent questions about the same resources.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+***EXAMPLE OF GRAPHQL WITH ANGULAR2:
+
+https://medium.com/codingthesmartway-com-blog/apollo-client-for-angular-making-use-of-graphql-8d9a571e020c
+https://alligator.io/angular/getting-started-graphql-apollo/
+https://gearheart.io/blog/how-to-use-graphql-with-angular-2-with-example/
+https://malcoded.com/posts/graphql-with-angular-apollo
+https://www.howtographql.com/angular-apollo/1-getting-started/
+https://www.npmjs.com/package/apollo-angular
+
+
+
+
+
+
+
+Problems with GraphQL
+
+
+Diminishes shared nothing architecture
+
+The beauty of RESTful APIs is that they complement shared nothing architecture well. For example, Moesif has a api.moesif.com/v1/search endpoint and a api.moesif.com/v1/alerting endpoint. Publicly, those two endpoints simply look like two different REST resources. Internally though, they point to two different microservices on isolated compute clusters. The search service is written in Scala and the alerting service is written in NodeJS. The complexity in routing HTTP requests via host or URL is much lower than inspecting a GraphQL query and performing multiple joins.
+Exposed for arbitrary requests
+
+While a main benefit of GraphQL is to enable clients to query for just the data they need, this can also be problematic especially for open APIs where an organization cannot control 3rd party client query behavior. Great care has to be taken to ensure GraphQL queries don’t result in expensive join queries that can bring down server performance or even DDoS the server. RESTful APIs can be constrained to match data model and indexing used.
+
+
+
+
+Rigidness of queries
+
+GraphQL removes the ability for custom query DSLs or side effect operations on top of an API. For example, the Elasticsearch API is RESTful, but also has a very powerful Elasticsearch DSL to perform advanced aggregations and metric calculations. Such aggregation queries may be harder to model within the GraphQL language.
+Non existent monitoring
+
+RESTful APIs have the benefit of following the HTTP spec with regards to resources just like a website. This enables many tools to probe a URL such as api.moesif.com/health which would return 5xx if not OK. For GraphQL APIs, you may not be able to leverage such tools unless you support placing the query as a URL parameter as most ping tools don’t support HTTP and request bodies.
+
+Besides ping services, there are very few SaaS or open source tools that support API analytics or deeper analysis of your API calls. Client errors are presented as a 200 OK in a GraphQL API. Existing tools that expect 400 errors will not work so you may miss errors happening on your API. Yet at the same time, more flexibility given to the client requires even more tools to catch and understand problems with your API.
+
+
+
+
+
+
+Conclusion
+
+GraphQL APIs can be exciting new technology, but it is important to understand the tradeoffs before making such architectural decisions. Some APIs such as those with very few entities and relationships across entities like analytics APIs may not be suited for GraphQL. Whereas applications with many different domain objects like e-commerce where you have items, users, orders, payments, and so on may be able to leverage GraphQL much more.
+
+In fact, GraphQL vs REST is like comparing SQL technologies vs noSQL. There are certain applications where it makes sense to model complex entities in a SQL Db. Whereas other apps that only have “messages” as in high volume chat apps or analytics APIs where the only entity is an “event” may be more suited using something like Cassandra.
+
+
+
+
+
+
+
+
+
+
+WHAT IT IS NOT (replacement for REST) https://apievangelist.com/2018/06/29/rest-api-and-graphql-burger-king/
+
+
+
+DISADVANTAGES
+
+https://blog.hitchhq.com/graphql-3-reasons-not-to-use-it-7715f60cb934
+
+
+CONCLUSION
+
+BENEFITS OF USING GRAPHQL FOR MICROSERVICES
+https://codeburst.io/nodejs-graphql-micro-services-using-remote-stitching-7540030a0753
+https://nordicapis.com/7-unique-benefits-of-using-graphql-in-microservices/
+
+
+
+Used:
+https://medium.com/devgorilla/what-is-graphql-f0902a959e4
+https://redmonk.com/jgovernor/2017/06/15/what-is-graphql-and-why-should-you-care-the-future-of-apis/
+https://blog.hellocomet.co/graphql-benefits-api/
+https://medium.com/codingthesmartway-com-blog/rest-vs-graphql-418eac2e3083
+
+http://artsy.github.io/blog/2018/05/08/is-graphql-the-future/
+https://www.apollographql.com/docs/fundamentals/benefits.html
+https://medium.com/codingthesmartway-com-blog/creating-a-graphql-server-with-node-js-and-express-f6dddc5320e1/
+https://blog.pusher.com/rest-versus-graphql/
+https://www.quora.com/Is-GraphQL-a-REST-killer
+https://www.blog.olympikesoft.com/graphql-advantages-disadvantages/
+https://blog.apollographql.com/graphql-vs-rest-5d425123e34b
+
+
+*****https://www.howtographql.com/basics/1-graphql-is-the-better-rest/
+*****https://medium.freecodecamp.org/rest-apis-are-rest-in-peace-apis-long-live-graphql-d412e559d8e4*****
+https://www.moesif.com/blog/technical/graphql/REST-vs-GraphQL-APIs-the-good-the-bad-the-ugly/
+
+
+
+
+
+
+
+
+Not Used:
+
+https://www.infoworld.com/article/3269074/apis/what-is-graphql-better-apis-by-design.html
+https://jaxenter.com/graphql-good-no-alternative-rest-services-142814.html
+https://www.prisma.io/blog/top-5-reasons-to-use-graphql-b60cfa683511/
+https://www.meteor.com/articles/what-is-graphql
+https://www.quora.com/What-are-advantages-and-disadvantages-of-GraphQL-SOAP-and-REST
+https://business.udemy.com/blog/graphql-vs-rest-4-benefits-graphql/
+https://nordicapis.com/5-potential-benefits-integrating-graphql/
+https://www.robinwieruch.de/why-graphql-advantages-disadvantages-alternatives/
+
+
+Links:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

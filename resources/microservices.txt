@@ -1,0 +1,85 @@
+https://www.sitepoint.com/node-js-is-the-new-black/
+
+https://blog.bitsrc.io/serverless-backend-using-aws-lambda-hands-on-guide-31806ceb735e?source=emailShare-91bfcdd30742-1538784032
+
+https://stackoverflow.com/questions/46048844/node-cache-vs-redis-for-simple-caching
+
+https://medium.com/@cmcorrales3/cache-rules-everything-around-me-9ae682cba778?source=emailShare-91bfcdd30742-1538947876
+
+https://medium.com/tech-tajawal/microservice-authentication-and-authorization-solutions-e0e5e74b248a
+
+
+https://github.com/leicesterjs/talks/blob/master/Monolith%20to%20Microservices.odp
+
+
+
+
+
+
+
+
+
+
+
+
+Questions?
+
+What did you use for your API gateway and why?
+
+We are considering KONG based on nginx (The World’s Most Popular Open Source Microservice API Gateway?) or building in Node.js based Express Gateway
+
+
+https://www.lunchbadger.com/vs-kong-api-gateway-express-pricing/
+
+KONG: custom plugins for Kong must be written in Lua.
+
+
+We went with EXPRESS GATEWAY (supports REDIS as backend data store)
+
+
+Have you heard of Artifactory as a Binary Repository Manager? 
+https://jfrog.com/artifactory/
+
+$2,950 /Year
+Unlimited number of users
+Version control for binaries
+Continuos Integration pugins for Jenkins for example
+
+
+
+Do you use any type of caching with Node.js?
+I want to cache json files what is the best way to do this?
+I've started to read up about Redis and Node-cache.
+Redis is a centralized cache whereas in node cache, the cache is set locally per server.
+https://community.risingstack.com/redis-node-js-introduction-to-caching/ (do tutorial and 
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+Central Repo (Artifactory is a Binary Repository Manager):
+https://jfrog.com/whitepaper/npm-10-reasons-to-use-a-binary-repository-manager-when-developing-with-node-js/
+
+
+
+
+
+
+
+
+Learn about Choas Monkey
+
+Learn about Swagger
+
+
+Good coding practices/ coding standards:
+Ask about powerpoint file.
+

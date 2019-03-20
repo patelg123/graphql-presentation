@@ -1,0 +1,535 @@
+Take Facebook, For Example
+
+Millions of users from around the world use Facebook every day. Plus, there are many different ways to access Facebook. Each of its major platforms has an app, and each of these apps have hundreds of versions. Adding a new feature could easily destroy this network of applications in the backend or the client apps. GraphQL is seamlessly integrated without breaking the existing apps.
+
+GraphQL is a syntax that describes how to ask for data, and is generally used to load data from a server to a client.
+
+
+It was created by Facebook back in 2012 to power their mobile applications. It is meant to provide a common interface between the client and the server for data fetching and manipulations. GraphQL was open sourced by Facebook in 2015.
+
+So what about Facebook? It built GraphQL because it needed something powerful enough to describe Facebook’s API structure, but easy to learn by mobile developers. It is seeing billions of API calls a day now, so we know it scales. As Facebook points out, the shape of the query mirrors the shape of the response, which is cool.
+
+Famous companies such as Twitter, Yelp, Pinterest, and Coursera rely on GraphQL for their platforms.
+
+
+
+    Give client-side developers an efficient way to query data they want to retrieve.
+    Give server-side developers an efficient way to get their data out to their users.
+    Give everyone an easy and efficient way of accessing data (it uses less resources than the REST API, especially with mobile applications).
+
+ for executing queries by using a type system you define for your data. 
+
+GraphQL isn’t tied to any specific database or storage engine and is instead backed by your existing code and data.
+
+
+GraphQL is an application layer query language that interprets a string by a server, which then returns the required data in a specified format. 
+
+
+
+One of the major issues of REST is that it multiplies round-trips to let you call several related functions. Each API request to pull a resource is a separate HTTP request-response cycle. Fetching complicated data requires multiple round-trips between the client and server to render even a single view. For mobile applications in variable network conditions, this is highly undesirable.
+
+On the contrary, GraphQL enables you to call several related functions without multiple round-trips. To make that happen, GraphQL unifies data and create packages, instead of letting multiple endpoints exist.
+
+
+With REST you can only pass a single set of arguments, but with GraphQL you can access a particular field or nested object without making multiple API fetches. 
+
+
+
+GitHub uses GraphQL as it offers more flexibility for the developers. The option to precisely generate the information that a user wants is a great advantage over sending multiple REST calls to receive the same. To generate the information using REST calls would require a two stage process?—?One to gather the information of the user and the other to fetch the information about the organization the user is associated with. GraphQL helps alleviate this two-step process.
+
+
+There are several advantages of GraphQL.
+
+GraphQL is declarative: 
+
+GraphQL is compositional: 
+
+GraphQL is strongly-typed: 
+
+
+
+
+
+
+---------
+
+ADVANTAGES:
+
+
+GraphQL has fewer roundtrips than REST
+
+
+
+This way to package data has two benefits:
+
+• more efficient data delivery
+• fewer resources required for roundtrip calls.
+
+
+[[difference-rest-graphql.png]]
+
+
+Multiple Round Trips To Fetch Related Resources
+
+Today’s web and mobile applications are often data-driven and require large sets of data combining related resources. Accessing those data by using a REST-based API often requires us to do multiple round-trips to collect everything what is needed. E.g. imagine you’d like to request information from a post entity. At the same time you’d like to request information of post author (which is a different entity). Typically this is done by sending two request to the REST API (e.g. by using HTTP GET). First to retrieve the post object and second to retrieve the user object.
+
+Endpoints for posts and suers:
+
+mydomain.com/posts/:id
+
+mydomain.com/users/:id
+
+Avoid round trips
+
+Since each GraphQL request returns only one response, switching to GraphQL can help you avoid costly round trips from the client to your server. With REST, each resource represents a round trip, which can quickly add up. If you’re fetching items in a list, you’ll have to complete a round trip for every resource multiplied by the number of items, causing slow load times especially on mobile devices.
+
+GET /api/dogs/breeds
+GET /api/dogs/images
+GET /api/dogs/activities
+
+With GraphQL, each query represents a single round trip from the client to server. If you’d like to reduce round trips even further, you can implement query batching to batch multiple queries into a single request. 
+
+Data fetching
+The most significant improvement that GraphQL introduced is data fetching. In a typical REST API, to fetch or retrieve data from a server, we might end up making requests to multiple endpoints. But with GraphQL, we only have one endpoint with which we access data on a server. With a single request, we can get an object and its related objects.
+
+Conclusion
+
+Both, REST and GraphQL, are API design architectures which can be used to build web services for data-driven applications. In this tutorial you’ve learned the main difference between those two concepts. 
+
+The RESTful approach is always limited to deal with single resources. If you need data which is coming from two or more resources (like posts and users) you need to do multi round trips to the server.  
+The GraphQL approach is much more flexible and is able to overcome the major shortcomings of REST as demonstrated in this tutorial. By using the GraphQL query language you can exactly describe what the response should look like. You’re able to specify which fields should be included to limit the response to the data which is needed. Furthermore you can use the graph and combine connected entities within one GraphQL data query. No additional server round trips needed.
+
+
+
+Network Requests
+A closer look at the the example above, 
+
+
+
+
+
+With GraphQL that is not the case. Because GraphQL is a declarative data fetching specification and a query language, we only fetch what we need from the server by constructing our query to only include what we need. The query below will only fetch the author’s name, nothing more and nothing less:
+
+    {
+      author {
+        name
+      }
+    }
+
+
+    {
+      "data": {
+        "author": {
+          "name": "Chimezie Enyinnaya"
+        }
+      }
+    }
+
+
+
+
+Facebook’s web API system, GraphQL, provides a new way to define APIs. Developers use a strongly typed query language to define both the requests and the responses, allowing an application to specify exactly what data it needs from an API. Thus GraphQL is meant to provide a more efficient, structured, and systematic alternative to REST.
+
+The REST APIs problems mentioned above are the ones specific to what GraphQL is trying to solve. They are certainly not all of the problems of REST APIs, and I don’t want to get into what a REST API is and is not. I am mostly talking about the popular resource-based-HTTP-endpoint APIs. Every one of those APIs eventually turns into a mix that has regular REST endpoints + custom ad-hoc endpoints crafted for performance reasons. This is where GraphQL offers a much better alternative.
+
+
+The other big concept that goes with this single endpoint concept is the rich client request language that is needed to work with that custom single endpoint. Without a client request language, a single endpoint is useless. It needs a language to process a custom request and respond with data for that custom request.
+
+Having a client request language means that the clients will be in control.
+
+They can ask for exactly what they need and the server will reply with exactly what that they’re asking for. This solves the over-fetching problem.
+
+When it comes to versioning, GraphQL has an interesting take on that.Versioning can be avoided all together. Basically, we can just add new fieldswithout removing the old ones, because we have a graph and we can flexibly grow the graph by adding more nodes. So we can leave paths on the graph for old APIs and introduce new ones without labeling them as new versions. The API just grows.
+
+RESTful APIs vs GraphQL APIs?—?Example
+
+Let’s imagine that we are the developers responsible for building a shiny new user interface to represent the Star Wars films and characters.
+
+The first UI we’ve been tasked to build is simple: a view to show information about a single Star Wars person. For example, Darth Vader, and all the films this person appeared in. This view should display the person’s name, birth year, planet name, and the titles of all the films in which they appeared.
+
+As simple as that sounds, we’re actually dealing with 3 different resources here: Person, Planet, and Film. The relationship between these resources is simple and anyone can guess the shape of the data here. A person object belongs to one planet object and it will have one or more films objects.
+
+The JSON data for this UI could be something like:
+
+    {
+      "data": {    "person": {
+          "name": "Darth Vader",
+          "birthYear": "41.9BBY",
+          "planet": {
+            "name": "Tatooine"
+          },
+          "films": [
+            { "title": "A New Hope" },
+            { "title": "The Empire Strikes Back" },
+            { "title": "Return of the Jedi" },
+            { "title": "Revenge of the Sith" }
+          ]
+        }
+      }
+    }
+
+Assuming a data service gave us this exact structure for the data, here’s one possible way to represent its view with React.js:
+
+    // The Container Component:
+    <PersonProfile person={data.person} ></PersonProfile>
+    // The PersonProfile Component:
+    Name: {person.name}
+    Birth Year: {person.birthYear}
+    Planet: {person.planet.name}
+    Films: {person.films.map(film => film.title)}
+
+This is a simple example, and while our experience with Star Wars might have helped us here a bit, the relationship between the UI and the data is very clear. The UI used all the “keys” from the JSON data object we imagined.
+
+Let’s now see how we can ask for this data using a RESTful API.
+
+We need a single person’s information, and assuming that we know the ID of that person, a RESTful API is expected to expose that information as:
+
+    GET - /people/{id}
+
+This request will give us the name, birthYear, and other information about the person. A good RESTful API will also give us the ID of this person’s planet and an array of IDs for all the films this person appeared in.
+
+The JSON response for this request could be something like:
+
+    {
+      "name": "Darth Vader",
+      "birthYear": "41.9BBY",
+      "planetId": 1
+      "filmIds": [1, 2, 3, 6],
+      *** other information we do not need ***
+    }
+
+Then to read the planet’s name, we ask:
+
+    GET - /planets/1
+
+And to read the films titles, we ask:
+
+    GET - /films/1
+    GET - /films/2
+    GET - /films/3
+    GET - /films/6
+
+Once we have all 6 responses from the server, we can combine them to satisfy the data needed by our view.
+
+Besides the fact that we had to do 6 round-trips to satisfy a simple data needfor a simple UI, our approach here was imperative. We gave instructions forhow to fetch the data and how to process it to make it ready for the view.
+
+You can try this yourself if you want to see what I mean. The Star Wars data has a RESTful API currently hosted at http://swapi.co/. Go ahead and try to construct our data person object there. The keys might be a bit different, but the API endpoints will be the same. You will need to do exactly 6 API calls.Furthermore, you will have to over-fetch information that the view does not need.
+
+Of course, this is just one implementation of a RESTful API for this data. There could be better implementations that will make this view easier to implement. For example, if the API server implemented nested resources and understood the relationship between a person and a film, we could read the films data with:
+
+    GET - /people/{id}/films
+
+However, a pure RESTful API server would most likely not implement that, and we would need to ask our backend engineers to create this custom endpoint for us. That’s the reality of scaling a RESTful API?—?we just add custom endpoints to efficiently satisfy the growing clients needs. Managing custom endpoints like these is hard.
+
+Let’s now look at the GraphQL approach. GraphQL on the server embraces the custom endpoints idea and takes it to its extreme. The server will be just a single endpoint and the channel does not matter. If we’re doing this over HTTP, the HTTP method certainly wouldn’t matter either. Let’s assume we have a single GraphQL endpoint exposed over HTTP at /graphql.
+
+Since we want to ask for the data we need in a single round-trip, we’ll need a way to express our complete data needs for the server. We do this with a GraphQL query:
+
+    GET or POST - /graphql?query={...}
+
+A GraphQL query is just a string, but it will have to include all the pieces of the data that we need. This is where the declarative power comes in.
+
+In English, here’s how we declare our data requirement: we need a person’s name, birth year, planet’s name, and the titles of all their films. In GraphQL, this translates to:
+
+    {
+      person(ID: ...) {
+        name,
+        birthYear,
+        planet {
+          name
+        },
+        films {
+          title
+        }
+      }
+    }
+
+Read the English-expressed requirements one more time and compare it to the GraphQL query. It’s as close as it can get. Now, compare this GraphQL query with the original JSON data that we started with. The GraphQL query is the exact structure of the JSON data, except without all the “values” parts. If we think of this in terms of a question-answer relation, the question is the answer statement without the answer part.
+
+If the answer statement is:
+
+    The closest planet to the Sun is Mercury.
+
+A good representation of the question is the same statement without the answer part:
+
+    (What is) the closest planet to the Sun?
+
+
+Besides the fact that we had to do 6 round-trips to satisfy a simple data need for a simple UI, our approach here was imperative. We gave instructions for how to fetch the data and how to process it to make it ready for the view.
+
+
+
+The same relationship applies to a GraphQL query. Take a JSON response,remove all the “answer” parts (which are the values), and you end up with aGraphQL query very suitable to represent a question about that JSON response.
+
+
+
+Of course, this is just one implementation of a RESTful API for this data. There could be better implementations that will make this view easier to implement. For example, if the API server implemented nested resources and understood the relationship between a person and a film, we could read the films data with:
+
+GET - /people/{id}/films
+
+
+
+
+However, a pure RESTful API server would most likely not implement that, and we would need to ask our backend engineers to create this custom endpoint for us. That’s the reality of scaling a RESTful API?—?we just add custom endpoints to efficiently satisfy the growing clients needs. Managing custom endpoints like these is hard.
+
+
+Let’s now look at the GraphQL approach. GraphQL on the server embraces the custom endpoints idea and takes it to its extreme. The server will be just a single endpoint and the channel does not matter. If we’re doing this over HTTP, the HTTP method certainly wouldn’t matter either. Let’s assume we have a single GraphQL endpoint exposed over HTTP at /graphql.
+
+Since we want to ask for the data we need in a single round-trip, we’ll need a way to express our complete data needs for the server. We do this with a GraphQL query:
+
+GET or POST - /graphql?query={...}
+
+A GraphQL query is just a string, but it will have to include all the pieces of the data that we need. This is where the declarative power comes in.
+
+In English, here’s how we declare our data requirement: we need a person’s name, birth year, planet’s name, and the titles of all their films. In GraphQL, this translates to:
+
+{
+  person(ID: ...) {
+    name,
+    birthYear,
+    planet {
+      name
+    },
+    films {
+      title
+    }
+  }
+}
+
+Read the English-expressed requirements one more time and compare it to the GraphQL query. It’s as close as it can get. Now, compare this GraphQL query with the original JSON data that we started with. The GraphQL query is the exact structure of the JSON data, except without all the “values” parts. If we think of this in terms of a question-answer relation, the question is the answer statement without the answer part.
+
+
+
+
+
+
+
+Now, compare the GraphQL query with the declarative React UI we defined for the data. Everything in the GraphQL query is used in the UI, and everything used in the UI appears in the GraphQL query.
+
+This is the great mental model of GraphQL. The UI knows the exact data it needs and extracting that requirement is fairly easy. Coming up with a GraphQL query is simply the task of extracting what’s used as variables directly from the UI.
+
+If we invert this model, it would still hold the power. If we have a GraphQLquery, we know exactly how to use its response in the UI because the query will be the same “structure” as the response. We don’t need to inspect the response to know how to use it and we don’t need any documentation about the API. It’s all built-in.
+
+Star Wars data has a GraphQL API hosted at https://github.com/graphql/swapi.... Go ahead and try to construct our data person object there. There are a few minor differences that we’ll explain later, but here’s the official query you can use against this API to read our data requirement for the view (with Darth Vader as an example):
+
+    {
+      person(personID: 4) {
+        name,
+        birthYear,
+        homeworld {
+          name
+        },
+        filmConnection {
+          films {
+            title
+          }
+        }
+      }
+    }
+
+This request gives us a response structure very close to what our view used, and remember, we’re getting all of this data in a single round-trip.
+
+
+ADVANTAGES
+
+GRAPHQL VS REST
+
+
+
+GraphQL vs. REST
+
+With REST, you typically submit your request by way of a specially crafted URL, with each variety of request sent to a different endpoint—for instance, /movie/2120 vs. /director/5130.
+
+With GraphQL, you submit a declarative request in a JSON-like query for the data you’re seeking, and all requests go to the same endpoint. The schema used for the request determines what data you’ll get back. It’s a standardized, self-describing way to ask for the specific data needed, and only the data needed. 
+
+
+Using different schemas for different types of requests, instead of using a different endpoint URL format, makes for a much more flexible query mechanism.
+
+GraphQL queries
+
+
+
+So What is GraphQL?
+
+A GraphQL query is a string that is sent to a server to be interpreted and fulfilled, which then returns JSON back to the client.
+
+
+One of the main advantages of adopting GraphQL is its declarative approach to data fetching. 
+
+Here, we’re describing the shape of the object we want to receive from the server. GraphQL takes care of combining and filtering the data while returning exactly what we ask for.
+
+
+
+
+
+
+
+What is GraphQL? (The Explain-it-like-I’m-5 version)
+
+GraphQL is all about data communication. You have a client and a server and both of them need to talk with each other. The client needs to tell the server what data it needs, and the server needs to fulfill this client’s data requirement with actual data. GraphQL steps into the middle of this communication.
+Screenshot captured from my Pluralsight course?—?Building Scalable APIs with GraphQL
+
+Why can’t the client just communicate directly with the server, you ask? It sure can.
+
+There are a few reasons to consider a GraphQL layer between clients and servers. One of those reasons, and perhaps the most popular one, is efficiency. The client usually needs to ask the server about multiple resources, and the server usually understands how to reply with a single resource. So the client ends up doing multiple round-trips to the server to gather all the data it needs.
+
+
+There are a lot more benefits to using a GraphQL layer. For example, one other big benefit is communicating with multiple services. When you have multiple clients requesting data from multiple services, a GraphQL layer in the middle can simplify and standardize this communication. Although this is not really a point against REST APIs?—?as it is easy to accomplish the same there?—?a GraphQL runtime offers a structured and standardized way of doing it.
+
+RIP_rest.jpg
+RIP_rest2.jpg
+(https://medium.freecodecamp.org/rest-apis-are-rest-in-peace-apis-long-live-graphql-d412e559d8e4)
+
+Instead of a client going to the two different data services directly (in the slide above), we can have that client communicate with the GraphQL layer. Then the GraphQL layer will do the communication with the two different data services. This is how GraphQL first isolates the clients from needing to communicate in multiple languages and also translates a single request into multiple requests to multiple services using different languages.
+
+
+Imagine that you have three people who speak three different languages and have different types of knowledge. Then imagine that you have a question that can only be answered by combining the knowledge of all three people together. If you have a translator who speaks all three languages, the task of putting together an answer to your question becomes easy. This is exactly what a GraphQL runtime does.
+
+
+REST APIs are usually a collection of endpoints, where each endpoint represents a resource. So when a client needs data from multiple resources, it needs to perform multiple round-trips to a REST API to put together the data it needs.
+
+In a REST API, there is no client request language. Clients do not have control over what data the server will return. There is no language through which they can do so. More accurately, the language available for clients is very limited.
+
+
+For example, the READ REST API endpoints are either:
+
+    GET /ResourceName - to get a list of all the records from that resource, or
+    GET /ResourceName/ResourceID - to get the single record identified by that ID.
+
+A client can’t, for example, specify which fields to select for a record in that resource. That information is in the REST API service itself and the REST API service will always return all of the fields regardless of which ones the client actually needs. GraphQL’s term for this problem is over-fetching of information that’s not needed. It’s a waste of network and memory resources for both the client and server.
+
+One other big problem with REST APIs is versioning. If you need to support multiple versions, that usually means new endpoints. This leads to more problems while using and maintaining those endpoints and it might be the cause of code duplication on the server.
+
+Every one of those APIs eventually turns into a mix that has regular REST endpoints + custom ad-hoc endpoints crafted for performance reasons. This is where GraphQL offers a much better alternative.
+
+
+
+
+DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. 
+
+
+
+
+
+
+
+
+
+
+
+
+In particular, using REST to transfer data often results in trouble loading “relational data,” which can sometimes load more information than required, and imposes stricter requirements and limited flexibility for front end developers.
+
+As a solution, Facebook developed a competing technique for transferring data between devices and databases called GraphQL. In recent years, this newer loading methodology has been adopted by hundreds of companies to solve issues with older REST approaches.
+
+Here are some of the issues with REST, how GraphQL solves these problems, and some of the key benefits of GraphQL over REST.
+
+
+Streamline front end and back end developer collaboration
+
+Whereas REST implementations define a strict set of principles and conventions for fetching data, GraphQL allows front end developers to change the information they request on the fly to better suit the application they are trying to build. This can be done at the sole discretion of a front end developer with little to no input from a back end developer. In contrast, REST implementations traditionally require closer collaboration between front end and back end developers, which is commonly seen as a drain on productivity due to the need for one party to complete a programming task before the other can begin working on their feature.
+
+
+
+REST:
+
+
+The core idea of REST is the resource. Each resource is identified by a URL, and you retrieve that resource by sending a GET request to that URL. You will likely get a JSON response, since that’s what most APIs are using these days. So it looks something like:
+
+GET /books/1
+
+{
+  "title": "Black Hole Blues",
+  "author": { 
+    "firstName": "Janna",
+    "lastName": "Levin"
+  }
+  // ... more fields here
+}
+
+(Note: In the example above, some REST APIs would return “author” as a separate resource.)
+
+
+In today’s REST APIs, the API is usually described as a list of endpoints:
+
+GET /books/:id
+GET /authors/:id
+GET /books/:id/comments
+POST /books/:id/comments
+
+So you could say that the “shape” of the API is linear?—?there’s a list of things you can access. When you are retrieving data or saving something, the first question to ask is “which endpoint should I call”?
+
+In GraphQL, as we covered above, you don’t use URLs to identify what is available in the API. Instead, you use a GraphQL schema:
+
+type Query {
+  book(id: ID!): Book
+  author(id: ID!): Author
+}
+
+type Mutation {
+  addComment(input: AddCommentInput): Comment
+}
+
+type Book { ... }
+type Author { ... }
+type Comment { ... }
+input AddCommentInput { ... }
+
+There are a few interesting bits here when compared to the REST routes for a similar data set. First, instead of sending a different HTTP verb to the same URL to differentiate a read vs. a write, GraphQL uses a different initial type?—?Mutation vs. Query. In a GraphQL document, you can select which type of operation you’re sending with a keyword:
+
+query { ... }
+mutation { ... }
+
+
+In GraphQL, you can send a complex query that fetches additional data according to relationships defined in the schema, but in REST you would have to do that via multiple requests, build the related data into the initial response, or include some special parameters in the URL to modify the response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hi,has anyone had experience with Redis for Node.js serverside caching? We are currently using Node-Cache on one of our Node.js web servers but we are thinking about setting up another Web server for load balancing purposes and thinking about using Redis.
+
+
+
+
+
