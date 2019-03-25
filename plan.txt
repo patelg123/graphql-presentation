@@ -1,0 +1,139 @@
+Slide:
+
+GraphQL logo and my name
+
+
+----------------------------------------------------------
+
+Slide:
+
+Overview of things to be covered:
+
+1) What is GraphQL
+
+2) Advantages of GraphQL over REST
+
+3) Disadvantages of GraphQL
+
+4) Demonstration of a simple NodeJS GraphQL server built using Express.js
+
+5) Questions
+
+----------------------------------------------------------
+
+Slide:
+
+What is GraphQL.
+Give some definitions
+
+----------------------------------------------------------
+
+
+Slide:
+
+Picard Graph??? QL slide
+
+----------------------------------------------------------
+
+
+Slide:
+
+https://blog.apollographql.com/the-concepts-of-graphql-bc68bd819be3
+
+Refers to Data Graphs.
+
+
+Data represented using a graph of nodes and edges (lines).
+
+Nodes represent objects and the edges represent relationships between these objects.
+
+A lot of data in modern applications can be represented using a graph of nodes and edges, with nodes representing objects and the edges representing relationships between these objects.
+
+----------------------------------------------------------
+
+Slide:
+
+Image of simple data graph
+
+
+----------------------------------------------------------
+
+Slide:
+
+Example of a GraphQL query
+
+----------------------------------------------------------
+
+Slide:
+
+Advantages of GraphQL over REST
+
+------------------------------------------------------------
+
+Slide:
+
+Disadvantages of GraphQL
+
+
+
+----------------------------------------------------------
+
+Slide:
+
+GraphQL server Libraries
+
+
+----------------------------------------------------------
+
+Slide:
+
+
+GraphQL Clients
+
+----------------------------------------------------------
+
+Slide:
+
+Live demonstration:
+
+
+(Open Source code in Atom, put in comments)
+
+
+
+----------------------------------------------------------
+
+Slide:
+
+Example of Appollo React
+
+
+---------------------------------------------------------
+
+
+Slide:
+
+Any (easy) questions?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
