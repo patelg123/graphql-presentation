@@ -66,6 +66,20 @@ Example of a GraphQL query
 
 Slide:
 
+Definition of GraphQL.
+
+
+
+-----------------------------------
+Slide:
+
+Explain Schema and Resolver
+
+
+----------------------------------------------------------
+
+Slide:
+
 Advantages of GraphQL over REST
 
 ------------------------------------------------------------
@@ -110,6 +124,13 @@ Example of Appollo React
 
 ---------------------------------------------------------
 
+Slide:
+
+Will GraphQL replace REST?
+
+
+
+---------------------------------------------------------
 
 Slide:
 
