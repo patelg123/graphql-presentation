@@ -1,0 +1,138 @@
+Core Concepts and fundamental language constructs of GraphQL :
+
+Schema
+Resolver Functions
+
+
+
+===GraphQL Schema===
+
+Resides on the GraphQL server
+Manages Queries and Mutations 
+Defines what is allowed to be executed 
+Describes the complete set of possible data (objects, fields, relationships) that a client can access
+Calls from client are validated and executed against the schema
+
+used in a server-side runtime to describe data and validate GraphQL queries
+
+and defines how clients can request the data
+
+
+#Most common are type Query (equivalent to GET in REST) and type Mutation  (equivalent to POST, UPDATE and DELETE in REST).
+
+GraphQL has its own language to write GraphQL Schemas called GraphQL Schema Definition Language (SDL).
+
+
+GraphQL has its own type system that’s used to define the schema of an API. The syntax for writing schemas is called Schema Definition Language (SDL).
+
+--------
+type Person {
+  name: String!
+  age: Int!
+}
+-----------
+
+This type has two fields, they’re called name and age and are respectively of type String and Int. The ! following the type means that this field is required.
+
+
+It’s also possible to express relationships between types. In the example of a blogging application, a Person could be associated with a Post:
+
+type Post {
+  title: String!
+  author: Person!
+}
+
+Conversely, the other end of the relationship needs to be placed on the Person type:
+
+type Person {
+  name: String!
+  age: Int!
+  posts: [Post!]!
+}
+
+Note that we just created a one-to-many-relationship between Person and Post since the posts field on Person is actually an array of posts.
+
+-----------------------------------------------
+
+
+The most basic components of a GraphQL schema are object types, which just represent a kind of object you can fetch from your service, and what fields it has.
+
+---------------------------------
+
+The schema is one of the most important concepts when working with a GraphQL API. It specifies the capabilities of the API and defines how clients can request the data. It is often seen as a contract between the server and client.
+
+Generally, a schema is simply a collection of GraphQL types. However, when writing the schema for an API, there are some special root types:
+
+type Query { ... }
+type Mutation { ... }
+type Subscription { ... } (Provides Realtime Updates When a client subscribes to an event, it will initiate and hold a steady connection to the server.) (experimental)
+
+The Query, Mutation, and Subscription types are the entry points for the requests sent by the client. To enable the allPersons-query that we saw before, the Query type would have to be written as follows:
+
+type Query {
+  allPersons: [Person!]!
+}
+
+allPersons is called a root field of the API. Considering again the example where we added the last argument to the allPersons field, we’d have to write the Query as follows:
+
+type Query {
+  allPersons(last: Int): [Person!]!
+}
+
+Similarly, for the createPerson-mutation, we’ll have to add a root field to the Mutation type:
+
+type Mutation {
+  createPerson(name: String!, age: Int!): Person!
+}
+
+Notice that this root field takes two arguments as well, the name and the age of the new Person.
+
+Finally, for the subscriptions, we’d have to add the newPerson root field:
+
+type Subscription {
+  newPerson: Person!
+}
+
+Putting it all together, this is the full schema for all the queries and mutation that you have seen in this chapter:
+
+type Query {
+  allPersons(last: Int): [Person!]!
+}
+
+type Mutation {
+  createPerson(name: String!, age: Int!): Person!
+}
+
+type Subscription {
+  newPerson: Person!
+}
+
+type Person {
+  name: String!
+  age: Int!
+  posts: [Post!]!
+}
+
+type Post {
+  title: String!
+  author: Person!
+}
+
+
+
+
+RESOLVERS:
+
+
+A resolver is responsible for mapping the operation to actual function. Inside type Query, we have an operation called users. We map this operation to a function with the same name inside root. We will also create some dummy users for this functionality.
+
+
+
+
+As you learned in the previous chapter, the payload of a GraphQL query (or mutation) consists of a set of fields. In the GraphQL server implementation, each of these fields actually corresponds to exactly one function that’s called a resolver. The sole purpose of a resolver function is to fetch the data for its field.
+
+When the server receives a query, it will call all the functions for the fields that are specified in the query’s payload. It thus resolves the query and is able to retrieve the correct data for each field. Once all resolvers returned, the server will package data up in the format that was described by the query and send it back to the client.
+
+
+
+

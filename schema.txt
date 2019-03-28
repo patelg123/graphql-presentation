@@ -1,0 +1,35 @@
+Core Concepts and fundamental language constructs of GraphQL
+
+
+
+===GraphQL Schema===
+
+Used in the GraphQL server-side runtime
+
+Describes the data available from the API
+
+Defines how clients can request data from the API
+
+Validates GraphQL queries
+
+Often seen as a contract between the server and client.
+
+
+
+====The GraphQL Schema Definition Language=====
+
+Typed Language
+
+One of the most common ways to define Schema
+
+Schemas consists of Object Types and Root Types
+
+
+
+
+
+
+The above defines the structure of a user 'model' in 
+
+describes the structure is an example of a simple Object Type 
+
