@@ -18,11 +18,11 @@ Often seen as a contract between the server and client.
 
 ====The GraphQL Schema Definition Language=====
 
-Typed Language
-
 One of the most common ways to define Schema
 
-Schemas consists of Object Types and Root Types
+Typed Language
+
+Schemas consists of Object Types and Root Types.
 
 
 

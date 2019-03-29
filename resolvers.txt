@@ -1,0 +1,8 @@
+RESOLVERS:
+
+
+Responsible for mapping operations to actual functions
+
+QUERIES
+
+
