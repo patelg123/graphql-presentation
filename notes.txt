@@ -136,3 +136,23 @@ When the server receives a query, it will call all the functions for the fields 
 
 
 
+Disadvantages:
+
+queries always return a HTTP status code of 200 (POST), regardless of whether or not that query was successful. If your query is unsuccessful, your response JSON will have a top-level errors key with associated error messages and stacktrace. This can make it much more difficult to do error handling and can lead to additional complexity for things like monitoring.
+
+lack of built-in caching support. Because REST APIs have multiple endpoints, they can leverage native HTTP caching to avoid refetching resources. With GraphQL, you will need to setup your own caching support 
+
+Although Resource exhaustion attacks are not specific to GraphQL, but when working with GraphQL we have to be extra careful about them.
+
+There are some mitigations we can do here. We can do cost analysis on the query in advance and enforce some kind of limits on the amount of data one can consume. We can also implement a time-out to kill requests that take too long to resolve. Also, since GraphQL is just a resolving layer, we can handle the rate limits enforcement at a lower level under GraphQL.
+
+
+If the GraphQL API endpoint we’re trying to protect is not public and is meant for internal consumption of our own clients (web or mobile), we can use a whitelist approach and pre-approve queries that the server can execute. Clients can just ask the servers to execute pre-approved queries using a query unique identifier. Facebook seems to be using this approach.
+
+
+complexity. If you have a simple REST API and deal with data that is relatively consistent over time, you would be better off sticking with your REST API.
+
+
+
+
+
