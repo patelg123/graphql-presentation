@@ -142,6 +142,10 @@ queries always return a HTTP status code of 200 (POST), regardless of whether or
 
 lack of built-in caching support. Because REST APIs have multiple endpoints, they can leverage native HTTP caching to avoid refetching resources. With GraphQL, you will need to setup your own caching support 
 
+
+that GraphQL makes easier is resource exhaustion attacks (AKA Denial of Service attacks). A GraphQL server can be attacked with overly complex queries that will consume all the resources of the server. 
+
+
 Although Resource exhaustion attacks are not specific to GraphQL, but when working with GraphQL we have to be extra careful about them.
 
 There are some mitigations we can do here. We can do cost analysis on the query in advance and enforce some kind of limits on the amount of data one can consume. We can also implement a time-out to kill requests that take too long to resolve. Also, since GraphQL is just a resolving layer, we can handle the rate limits enforcement at a lower level under GraphQL.
@@ -151,6 +155,12 @@ If the GraphQL API endpoint we’re trying to protect is not public and is meant f
 
 
 complexity. If you have a simple REST API and deal with data that is relatively consistent over time, you would be better off sticking with your REST API.
+
+
+If you have a simple REST API and deal with data that is relatively consistent over time, you would be better off sticking with your REST API. For companies that deal with rapidly-changing data, and have the engineering resources to devote to rearchitecting their API platforms, GraphQL can solve many of the pain points experienced with REST APIs.
+
+if you find yourself working with rapidly-changing data at scale, it could be a great solution for your business.
+
 
 
 
