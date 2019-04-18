@@ -9,6 +9,8 @@ query getSingleCourse($courseID: Int!) {
 }
 
 
+QUERY VARIABLES BOX:
+
 { 
     "courseID":1
 }
